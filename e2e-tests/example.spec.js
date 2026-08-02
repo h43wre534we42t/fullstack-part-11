@@ -10,4 +10,11 @@ describe('Pokedex', () => {
       ),
     ).toBeVisible()
   })
+
+  test('a single pokemons page can be opened', async ({ page }) => {
+    await page.goto('')
+    await page.getByText('charizard').click()
+
+    await expect(page.getByText('solar power')).toBeVisible()
+  })
 })
