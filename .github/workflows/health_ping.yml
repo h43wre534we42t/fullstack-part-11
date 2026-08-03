@@ -3,7 +3,7 @@ name: health check ping
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '15 12 15 * *'
 
 jobs:
   health_check:
