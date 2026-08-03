@@ -10,6 +10,10 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
+app.get('/githealth', (req, res) => {
+  res.status(500).send('failed')
+})
+
 const start = async () => {
   app.listen(PORT)
   console.log(`server started on port ${PORT}`)
