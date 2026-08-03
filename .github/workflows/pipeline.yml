@@ -25,6 +25,19 @@ jobs:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
+      - name: Successful Job Discord Ping
+        if: ${{ success() }}
+        uses: Sniddl/discord-commits@v1.8
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          template: 'avatar-with-link'
+      - name: Unsuccessful Job Discord Ping
+        if: ${{ success() }}
+        uses: Sniddl/discord-commits@v1.8
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          template: 'avatar-with-link'
+          include-extras: true
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message, ' ')), '#skip') }}
     needs: simple_deployment_pipeline
@@ -32,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.75.0
+        uses: anothrNick/github-tag-action@4ed44965e0db8dab2b466a16da04aec3cc312fd8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
