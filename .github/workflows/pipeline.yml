@@ -26,7 +26,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
   tag_release:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message, ' ')), '#skip') }}
     needs: simple_deployment_pipeline
     runs-on: ubuntu-latest
     steps:
