@@ -7,7 +7,11 @@ const PORT = process.env.PORT || 5001
 app.use(express.static('dist'))
 
 app.get('/health', (req, res) => {
-  res.status(500).send('Database unavailable')
+  res.send('ok')
+})
+
+app.get('/health/github', (req, res) => {
+  res.status(500)
 })
 
 const start = async () => {
