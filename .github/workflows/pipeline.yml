@@ -26,7 +26,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
       - name: Successful Job Discord Ping
-        if: ${{ success() }}
+        if: ${{ success() && github.event_name == 'push' }}
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -34,7 +34,7 @@ jobs:
           status: success
           description: 'New version deployed'
       - name: Unsuccessful Job Discord Ping
-        if: ${{ !success() }}
+        if: ${{ failure() && github.event_name == 'push' }}
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
