@@ -11,7 +11,7 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/githealth', (req, res) => {
-  res.status(500).send('failed')
+  res.send('ok')
 })
 
 const start = async () => {
