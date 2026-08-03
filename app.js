@@ -10,8 +10,8 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
-app.get('/health/github', (req, res) => {
-  res.status(500)
+app.get('/githealth', (req, res) => {
+  res.status(500).send('failed')
 })
 
 const start = async () => {
